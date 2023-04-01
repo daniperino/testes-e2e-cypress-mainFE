@@ -21,9 +21,30 @@ describe('Jornadas de usuário', () => {
         cy.getByData('titulo-principal').contains('Experimente mais liberdade no controle da sua vida financeira. Crie sua conta com a gente!')
 
     });
-    it('Deve realizar cadastro na aplicação, logo depois fazer login com esse novo cadastro', () => {
+    it.only('Deve realizar cadastro na aplicação, logo depois fazer login com esse novo cadastro', () => {
         cy.visit('/')
 
+        cy.getByData('botao-cadastro').click()
+        cy.getByData('nome-input').type('Rafael')
+        cy.getByData('email-input').type('rafaelv@gmail.com')
+        cy.getByData('senha-input').type('123456')
+        cy.getByData('checkbox-input').click()
+        cy.getByData('botao-enviar').click()
+        cy.getByData('mensagem-sucesso').should('exist').end('have.text', 'Usuário cadastrado com sucesso!')
         
+        cy.location('pathname').should('eq', '/')
+
+        cy.getByData('botao-login').click()
+        cy.getByData('email-input').type('rafaelv@gmail.com')
+        cy.getByData('senha-input').type('123456')
+        cy.getByData('botao-enviar').click()
+
+        cy.location('pathname').should('eq', '/home')
+        cy.get('.Principal_titulo__fax-J').contains('Bem vindo de volta!')
+
+            
+        
+        
+
     });
 });
