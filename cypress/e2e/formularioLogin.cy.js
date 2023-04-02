@@ -10,7 +10,7 @@ describe('Formulário de Login',()=>{
         cy.getByData('mensagem-erro').should('exist').and('have.text', 'O email digitado é inválido')
     })
 
-    it.only('Não deve permitir email e senha vazios', () => {
+    it('Não deve permitir email vazio', () => {
         cy.getByData("botao-login").click()
         cy.getByData('senha-input').type('Teste@123')
         cy.getByData('botao-enviar').click()
