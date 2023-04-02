@@ -6,7 +6,7 @@ describe('Testando multiplas páginas', () => {
         cy.getByData('senha-input').type('Teste@123')
         cy.getByData('botao-enviar').click()
 
-        //
+        
         cy.location('pathname').should('eq', '/home')
 
         /*.find('a') encontra o elemento a da pagina, para pegar "cartões" é um array
